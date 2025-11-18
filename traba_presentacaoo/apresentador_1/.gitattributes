@@ -1,0 +1,8 @@
+/*
+  Arquivo: .gitattributes
+  Atribuído para: Apresentador 1
+  Descrição geral: Este arquivo faz parte do site. Abaixo há comentários detalhados sobre as responsabilidades e o que cada bloco de código faz.
+*/
+
+# Auto detect text files and perform LF normalization
+* text=auto
