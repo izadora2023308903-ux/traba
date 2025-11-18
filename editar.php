@@ -47,5 +47,5 @@ if (!$pet) { echo 'Pet não encontrado.'; exit; }
   </form>
 </div>
 
-  <div class="footer card small">Desenvolvido com ❤️ — sistema de adoção</div>
+  <div class="footer card small">Desenvolvido por Iza, Lilo e Maria — sistema de adoção</div>
 </div></body></html>

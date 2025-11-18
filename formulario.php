@@ -38,5 +38,5 @@ if (!isset($_SESSION['admin_id'])) { header('Location: login.php'); exit; }
   </form>
 </div>
 
-  <div class="footer card small">Desenvolvido com ❤️ — sistema de adoção</div>
+  <div class="footer card small">Desenvolvido por Iza, Lilo e Maria — sistema de adoção</div>
 </div></body></html>
