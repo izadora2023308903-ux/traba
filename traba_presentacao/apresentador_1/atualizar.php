@@ -1,7 +1,7 @@
 <?php
 /*
   Arquivo: atualizar.php
-  Atribuído para: Apresentador 1
+  Atribuído para: codigos 1
   Descrição geral: Este arquivo faz parte do site. Abaixo há comentários detalhados sobre as responsabilidades e o que cada bloco de código faz.
 */
 
