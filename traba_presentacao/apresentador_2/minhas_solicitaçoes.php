@@ -1,7 +1,7 @@
 <?php
 /*
   Arquivo: minhas_solicitaçoes.php
-  Atribuído para: Apresentador 2
+  Atribuído para: codigo 2
   Descrição geral: Este arquivo faz parte do site. Abaixo há comentários detalhados sobre as responsabilidades e o que cada bloco de código faz.
 */
 
