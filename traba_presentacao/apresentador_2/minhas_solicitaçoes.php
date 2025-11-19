@@ -15,7 +15,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// busca as solicitações da usuária
+// busca as solicitações do usuario
 $stmt = $pdo->prepare("
     SELECT pedidos.*, pets.nome AS pet_nome 
     FROM pedidos
