@@ -2,18 +2,39 @@
 /*
   Arquivo: minhas_solicitaçoes.php
   Atribuído para: codigo 2
-  Descrição geral: Este arquivo faz parte do site. Abaixo há comentários detalhados sobre as responsabilidades e o que cada bloco de código faz.
+  Descrição geral: Página onde o usuário logado visualiza todas as solicitações
+  de adoção feitas por ele. Faz consulta ao banco de dados e exibe os resultados.
 */
 
-require_once 'config.php';
+require_once 'config.php'; 
+// Importa a configuração do banco de dados e inicia a sessão automaticamente
 
-// só entra se estiver logado como usuário
+// Verifica se o usuário está logado
 if (!isset($_SESSION['user_id'])) { 
+    // Caso não esteja logado, redireciona para a página de login
     header("Location: login.php");
     exit; 
 }
 
-$user_id = $_SESSION['user_id'];
+$user_id = $_SESSION['user_id']; 
+// Armazena o ID do usuário logado para usar na consulta
+
+// Consulta SQL para buscar as solicitações feitas pelo usuário
+// LEFT JOIN traz informações do pet associado à solicitação
+$stmt = $pdo->prepare("
+    SELECT pedidos.*, pets.nome AS pet_nome 
+    FROM pedidos
+    LEFT JOIN pets ON pets.id = pedidos.pet_id
+    WHERE pedidos.user_id = :uid
+    ORDER BY pedidos.data_solicitacao DESC
+");
+
+// Executa a consulta passando o ID do usuário como parâmetro
+$stmt->execute(['uid' => $user_id]);
+
+// Obtém todos os resultados em forma de array
+$dados = $stmt->fetchAll();
+?>
 
 // busca as solicitações do usuario
 $stmt = $pdo->prepare("
@@ -26,6 +47,7 @@ $stmt = $pdo->prepare("
 $stmt->execute(['uid' => $user_id]);
 $dados = $stmt->fetchAll();
 ?>
+
 <!doctype html>
 <html>
 <head>
