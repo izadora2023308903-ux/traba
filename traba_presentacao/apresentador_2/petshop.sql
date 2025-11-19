@@ -23,14 +23,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- Banco de dados: `petshop`
---
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `pets`
+tabelas pet
 --
 
 CREATE TABLE `pets` (
@@ -95,7 +88,6 @@ VALUES (
   'admin@petshop.com',
   '$2y$10$Zxg7/RjHtFZ64IymrA/JHukM5H3w4r3J3eHc4rgrHfPjNqzngdKWS'
 );
--- senha: senha123
 
 -- ADICIONANDO TABELA admins, coluna imagem em pets e pedidos
 CREATE TABLE IF NOT EXISTS admins (
@@ -117,7 +109,6 @@ CREATE TABLE IF NOT EXISTS pedidos (
   FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
   FOREIGN KEY (pet_id) REFERENCES pets(id) ON DELETE CASCADE
 );
--- Obs: insira um admin manualmente usando password_hash em PHP ou via phpMyAdmin.
 
 -- Atualização: adicionar colunas de contato na tabela pedidos
 ALTER TABLE pedidos ADD COLUMN IF NOT EXISTS nome VARCHAR(200) DEFAULT NULL;
@@ -157,6 +148,4 @@ CREATE TABLE IF NOT EXISTS admins (
 INSERT INTO admins (nome, email, senha_hash)
 SELECT 'Administrador', 'admin@petshop.com', '$2y$10$JcL4kS0dT0QkMNOdIYliOOd2tyYrh5dtOj6/mRmlAQyMzX2aPPmWO'
 WHERE NOT EXISTS (SELECT 1 FROM admins WHERE email = 'admin@petshop.com');
--- senha: admin123
 
--- Observação: importe esse SQL via phpMyAdmin para aplicar as alterações necessárias.
