@@ -1,28 +1,46 @@
 <?php
 require_once 'config.php';
-if (!isset($_SESSION['user_id'])) { header('Location: login.php'); exit; }
-if (!isset($_REQUEST['pet_id'])) { echo 'Pet não informado.'; exit; }
-$pet_id = intval($_REQUEST['pet_id']);
-$stmt = $pdo->prepare('SELECT * FROM pets WHERE id = :id');
-$stmt->execute(['id'=>$pet_id]);
-$pet = $stmt->fetch();
-if (!$pet) { echo 'Pet não encontrado.'; exit; }
-?><?php require_once 'config.php'; ?>
-<!doctype html><html><head><meta charset='utf-8'><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Solicitar Adoção</title><link rel="stylesheet" href="style.css"></head><body>
-<div class="container">
-  <div class="card form">
-    <h2>Solicitar adoção - <?= htmlspecialchars($pet['nome']) ?></h2>
-    <form method="POST" action="process_solicitacao.php">
-      <input type="hidden" name="pet_id" value="<?= $pet['id'] ?>">
-      <label>Nome completo</label><input type="text" name="nome" required>
-      <label>Endereço</label><input type="text" name="endereco" required>
-      <label>Telefone</label><input type="text" name="telefone" required>
-      <div style="display:flex;gap:8px;margin-top:8px;">
-        <button class="button" type="submit">Enviar solicitação</button>
-        <a class="button ghost" href="index.php">Cancelar</a>
-      </div>
-    </form>
-  </div>
-  <div class="footer card small">Voltar | PetShop</div>
-</div></body></html>
+
+// Inicia sessão apenas se ainda não existir
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Verifica se o usuário está logado
+if (!isset($_SESSION['user_id'])) {
+    die("Você precisa estar logado para solicitar adoção.");
+}
+
+// Verifica envio do formulário
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $usuario_id = $_SESSION['user_id'];
+    $pet_id = $_POST['pet_id'];
+
+    $nome = $_POST['nome'] ?? $_SESSION['user_nome'];
+    $telefone = $_POST['telefone'] ?? '';
+    $endereco = $_POST['endereco'] ?? '';
+
+    try {
+        // INSERE NOVA SOLICITAÇÃO
+        $stmt = $pdo->prepare("
+            INSERT INTO pedidos (usuario_id, pet_id, nome, telefone, endereco, status, criado_em)
+            VALUES (:usuario_id, :pet_id, :nome, :telefone, :endereco, 'pendente', NOW())
+        ");
+
+        $stmt->execute([
+            'usuario_id' => $usuario_id,
+            'pet_id' => $pet_id,
+            'nome' => $nome,
+            'telefone' => $telefone,
+            'endereco' => $endereco
+        ]);
+
+        echo "Solicitação enviada com sucesso!";
+        exit;
+
+    } catch (PDOException $e) {
+        die("Erro ao salvar solicitação (DB): " . $e->getMessage());
+    }
+}
+?>

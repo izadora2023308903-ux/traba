@@ -1,0 +1,101 @@
+/* GRID DOS PETS */
+.pets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* CARD */
+.pet-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    transition: 0.2s ease;
+}a
+
+.pet-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ÁREA DA IMAGEM */
+.foto {
+    /*
+    width: 180px;
+    height: 200px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 10px;
+    margin-bottom: 12px;
+    background: #f5f5f5;
+    */
+
+    width: 100%;
+    height: 200px;
+    /* mantém a altura que você queria */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    background: #f5f5f5;
+    object-position: center top;
+}
+
+/* IMAGEM COM TAMANHO CONTROLADO */
+/*
+.foto img {
+    max-width: 160px;   
+    max-height: 160px;  
+    width: 160px;       
+    height: 160px;      
+}
+*/
+.foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* garante que tudo fica proporcional */
+    border-radius: 10px;
+}
+
+/* CORPO DO CARD */
+.pet-body h3 {
+    margin: 0 0 6px 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.pet-body p {
+    margin: 4px 0;
+}
+
+.pet-body .small {
+    font-size: 13px;
+    color: #666;
+}
+
+/* AÇÕES */
+.actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* BORDAS DEFINIDAS PELO JQUERY */
+.class_cachorro {
+    border: 2px solid #0074ff;
+    background: #e7f1ff;
+}
+
+.class_gato {
+    border: 2px solid #009933;
+    background: #e8f9f0;
+}
